@@ -10,6 +10,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,21 +30,12 @@ public class MainActivity extends AppCompatActivity {
     }
     void init(){
         //YourData[] dataObjects = ...;
-        Random r =new Random();
-        List<Entry> entries = new ArrayList<Entry>();
+        List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+        dataSets.add(getData("4月每日支出",Color.BLUE));
+        dataSets.add(getData("5月每日支出",Color.GREEN));
 
-        for (int i =1;i<=50;i++) {
-            entries.add(new Entry(i,r.nextInt(500)));
 
-            // turn your data into Entry objects
-        }
-
-        LineDataSet dataSet = new LineDataSet(entries, "每日耗用"); // add entries to dataset
-        dataSet.setColor(Color.BLUE);
-        dataSet.setValueTextSize(10f);
-        dataSet.setValueTextColor(Color.BLACK); // styling, ...
-
-        LineData lineData = new LineData(dataSet);
+        LineData lineData = new LineData(dataSets);
         chart.setData(lineData);
         chart.invalidate(); // refresh
 
@@ -58,13 +50,26 @@ public class MainActivity extends AppCompatActivity {
 
         YAxis rightAxis = chart.getAxisRight();
         rightAxis.setEnabled(false);
-        chart.setVisibleXRangeMaximum(30);
+        chart.setVisibleXRangeMaximum(10);
 //        xAxis.setLabelCount(5);
         chart.invalidate(); // refresh
 
+    }
 
+    LineDataSet getData(String label,int color){
+        Random r =new Random();
+        List<Entry> entries = new ArrayList<Entry>();
 
+        for (int i =1;i<=50;i++) {
+            entries.add(new Entry(i,r.nextInt(500)));
 
+            // turn your data into Entry objects
+        }
 
+        LineDataSet dataSet = new LineDataSet(entries, label); // add entries to dataset
+        dataSet.setColor(Color.BLUE);
+        dataSet.setValueTextSize(10f);
+        dataSet.setValueTextColor(Color.BLACK); // styling, ...
+        return dataSet;
     }
 }
