@@ -44,17 +44,17 @@ public class MainActivity extends AppCompatActivity {
         //chart.invalidate(); // refresh
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextSize(15f);
+        xAxis.setTextSize(15);
         xAxis.setTextColor(Color.RED);
 
         YAxis leftAxis = chart.getAxisLeft();
-        leftAxis.setTextSize(15f);
+        leftAxis.setTextSize(15);
         leftAxis.setTextColor(Color.BLACK);
 
         YAxis rightAxis = chart.getAxisRight();
         rightAxis.setEnabled(false);
         chart.setVisibleXRangeMaximum(5);
-//        xAxis.setLabelCount(5);
+        xAxis.setGranularity(1); // restrict interval to 1 (minimum)
         chart.invalidate(); // refresh
 
     }
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         LineDataSet dataSet = new LineDataSet(entries, label); // add entries to dataset
         dataSet.setColor(color);
-        dataSet.setValueTextSize(10f);
+        dataSet.setValueTextSize(10);
         dataSet.setValueTextColor(Color.BLACK); // styling, ...
         dataSet.setLineWidth(3);//設定線的寬度
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);//設定線的形式(曲線)
